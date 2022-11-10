@@ -25,7 +25,7 @@ const Login = () => {
     e.preventDefault();
     
     axios
-      .post("http://localhost:8080/auth/login", data)
+      .post("https://jidoka-assignment.herokuapp.com/auth/login", data)
       .then((res) => {   
       localStorage.setItem("token", JSON.stringify({
         isLoggedIn: true,

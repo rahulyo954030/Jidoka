@@ -20,7 +20,7 @@ const Signup = () => {
 
   const submitHandler = async(e) => {
     e.preventDefault();
-    axios.post("http://localhost:8080/auth/signup", data)
+    axios.post("https://jidoka-assignment.herokuapp.com/auth/signup", data)
     .then((res) => {
       console.log(res.data);
       setData(initialData);
