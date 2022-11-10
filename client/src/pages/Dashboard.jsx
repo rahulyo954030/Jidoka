@@ -2,6 +2,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client"
+import "../styles/Dashboard.css"
 
 import {
     PieChart,
@@ -40,7 +41,7 @@ const Dashboard = () => {
   // },[])
 
   return (
-    <div>
+    <div className="graph">
         <div style={{width: '100vw', height: '100vh'}}>
     <BarChart width={730} height={250} data={dummydata}>
       <CartesianGrid strokeDasharray="3 3" />
