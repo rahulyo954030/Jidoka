@@ -1,58 +1,67 @@
-
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import io from "socket.io-client"
-import "../styles/Dashboard.css"
+import io from "socket.io-client";
+import "../styles/Dashboard.css";
 
 import {
-    PieChart,
-    Pie,
-    Tooltip,
-    BarChart,
-    XAxis,
-    YAxis,
-    Legend,
-    CartesianGrid,
-    Bar,
-    LineChart,
-    Line
-  } from "recharts";
-
- 
+  PieChart,
+  Pie,
+  Tooltip,
+  BarChart,
+  XAxis,
+  YAxis,
+  Legend,
+  CartesianGrid,
+  Bar,
+  LineChart,
+  Line,
+} from "recharts";
 
 const Dashboard = () => {
-    const [data,setData] = useState("")
+  const [data, setData] = useState("");
 
-     const dummydata = [
+  const dummydata = [
     { name: "Mon", users: 4 },
     { name: "Tues", users: 3 },
     { name: "Wed", users: 2 },
     { name: "Thurs", users: 4 },
     { name: "Fri", users: 3 },
     { name: "Sat", users: 2 },
-    { name: "Sun", users: 4 }
+    { name: "Sun", users: 4 },
   ];
 
-  // useEffect(()=>{
-  //   const socket = io("http://localhost:8080")
-  //   socket.on("message",(data)=>{
-  //     setData(data)
-  //   })
-  // },[])
+  useEffect(() => {
+    setInterval(() => {
+      const socket = io("https://jidoka-assignment.herokuapp.com");
+      socket.on("message", (data) => {
+        setData(data);
+      });
+    }, 1000);
+  }, []);
 
   return (
     <div className="graph">
-        <div style={{width: '100vw', height: '100vh'}}>
-    <BarChart width={730} height={250} data={dummydata}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Bar label={true} dataKey="users" fill="#8884d8" />
-    </BarChart>
-  </div>
-  <div>{data}</div>
+      <BarChart
+        width={1000}
+        height={400}
+        data={data}
+        margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
+      >
+        <CartesianGrid strokeDasharray="blue" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Bar
+          type="monotone"
+          dataKey="x"
+          stroke="yellow"
+          yAxisId={0}
+          color={"yellow"}
+          background={"red"}
+        />
+      </BarChart>
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
