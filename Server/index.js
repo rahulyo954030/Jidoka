@@ -80,8 +80,8 @@ server.on("connection", (socket) => {
   }
   data.push({
     name: data[data.length - 1].name + 1,
-    x: Math.random() * 10,
-    y: Math.random() * 10,
+    x: Math.random() * 6,
+    y: Math.random() * 6,
   });
 
   setInterval(() => {
